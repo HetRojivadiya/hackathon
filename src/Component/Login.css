@@ -1,0 +1,22 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa; /* Set your preferred background color */
+}
+
+/* Style the login card */
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    background-color: #ffffff; /* Set your preferred card background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.h2-size {
+    font-size: 2rem; /* You can adjust the size as needed */
+  }
