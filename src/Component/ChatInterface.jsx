@@ -1,3 +1,243 @@
+// import React, { useState } from 'react';
+
+// const ChatInterface = () => {
+//   const [messages, setMessages] = useState([]);
+//   const [question, setInputMessage] = useState('');
+//   const [isDarkMode, setIsDarkMode] = useState(false);
+//   const [uploadedFiles, setUploadedFiles] = useState([]);
+//   const [selectedCategory, setSelectedCategory] = useState('Sem 5'); // Default category
+
+  
+//   const [response, setResponse] = useState('');
+
+//   const toggleDarkMode = () => {
+//     setIsDarkMode(!isDarkMode);
+//   };
+
+  // const handleSendMessage = async() => {
+  //   if (question.trim() !== '') {
+  //     const newMessages = [...messages, { text: question, isUser: true }];
+  //     setMessages(newMessages);
+      
+
+  //     try {
+  //       const requestOptions = {
+  //         method: 'POST',
+  //         headers: { 'Content-Type': 'application/json' },
+  //         body: JSON.stringify({ question }),
+  //       };
+  
+  //       const url = 'https://11c7-34-134-126-4.ngrok-free.app/api'; // Replace with your API endpoint
+  
+  //       const response = await fetch(url, requestOptions);
+  //       if (!response.ok) {
+  //         throw new Error('Network response was not ok');
+  //       }
+  
+  //       const data = await response.json();
+  //       console.log(data.message);
+  
+  //       const updatedMessages = [...newMessages, { text: data.message, isUser: false }];
+  //       setMessages(updatedMessages);
+  //       setInputMessage('');
+  //     } catch (error) {
+  //       console.error('Error:', error);
+  //     }
+    
+      
+        
+      
+
+      
+   
+      
+  //   }
+  // };
+
+//   const handleFileUpload = (e) => {
+//     const files = e.target.files;
+//     const fileArray = Array.from(files);
+//     const currentDate = new Date().toLocaleString();
+//     const filesWithDate = fileArray.map((file) => ({
+//       file,
+//       date: currentDate,
+//       category: selectedCategory,
+//     }));
+//     setUploadedFiles([...uploadedFiles, ...filesWithDate]);
+//   };
+
+//   const changeCategory = (category) => {
+//     setSelectedCategory(category);
+//   };
+
+//   return (
+//     <div
+//       className={`h-screen ${
+//         isDarkMode
+//           ? 'bg-gradient-to-b from-black to-gray-900 text-white'
+//           : 'bg-gray-100 text-black'
+//       } flex flex-col`}
+//     >
+//       <div className="flex-1 flex">
+//         <div
+//           className={`w-1/4 p-4 ${
+//             isDarkMode ? 'bg-gray-900' : 'bg-gray-200'
+//           } transition-all`}
+//         >
+//           {/* Profile Section */}
+//           <div className="p-4">
+//             <h1>Dev Sanghvi</h1>
+//           </div>
+//           {/* Document Upload Section */}
+//           <div className="p-4">
+//             <h2 className="text-lg font-semibold mb-2">Upload Documents</h2>
+//             <input
+//               type="file"
+//               accept=".pdf, .doc, .docx"
+//               multiple
+//               onChange={handleFileUpload}
+//               className="w-full p-2 border rounded-lg"
+//             />
+//             <div className="mt-4">
+//               <h3 className="text-lg font-semibold mb-2">Uploaded Documents</h3>
+//               {/* Category selection buttons */}
+//               <div className="mb-2">
+//                 <button
+//                   onClick={() => changeCategory('Sem 5')}
+//                   className={`${
+//                     selectedCategory === 'Sem 5'
+//                       ? 'bg-blue-500 text-white'
+//                       : 'bg-gray-400 text-black'
+//                   } px-3 py-2 rounded-full mr-2 cursor-pointer transition-all hover:bg-blue-400 hover:text-white`}
+//                 >
+//                   Sem 5
+//                 </button>
+//                 <button
+//                   onClick={() => changeCategory('Sem 6')}
+//                   className={`${
+//                     selectedCategory === 'Sem 6'
+//                       ? 'bg-blue-500 text-white'
+//                       : 'bg-gray-400 text-black'
+//                   } px-3 py-2 rounded-full cursor-pointer transition-all hover:bg-blue-400 hover:text-white`}
+//                 >
+//                   Sem 6
+//                 </button>
+//               </div>
+//               <div className="flex flex-col space-y-3">
+//                 {uploadedFiles
+//                   .filter((item) => item.category === selectedCategory)
+//                   .map((item, index) => (
+//                     <div
+//                       key={index}
+//                       className={`${
+//                         isDarkMode ? 'bg-gray-900' : 'bg-gray-200'
+//                       } p-3 rounded-lg flex justify-between items-center transition-all cursor-pointer hover:bg-gray-600`}
+//                     >
+//                       <div>
+//                         <p className="text-base font-semibold">
+//                           {item.file.name}
+//                         </p>
+//                         <p className="text-sm text-gray-500">{item.date}</p>
+//                       </div>
+//                       <a
+//                         href={URL.createObjectURL(item.file)}
+//                         download={item.file.name}
+//                         className="text-blue-500 hover:text-blue-600"
+//                       >
+//                         Download
+//                       </a>
+//                     </div>
+//                   ))}
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//         <div
+//           className={`w-3/4 p-4 ${
+//             isDarkMode
+//               ? 'bg-gradient-to-b from-black to-gray-900'
+//               : 'bg-white'
+//           }`}
+//         >
+//           {/* logo */}
+//           <div className="py-4 border-b border-gray-300 flex justify-center items-center">
+//             <h2 className="text-2xl font-semibold">
+//               BharatSamikshak
+//             </h2>
+//             <button
+//               onClick={toggleDarkMode}
+//               className={`${
+//                 isDarkMode
+//                   ? 'bg-blue-800 hover:bg-blue-700'
+//                   : 'bg-gray-200 hover-bg-gray-300'
+//               } px-3 py-1 rounded-full ml-2 transition-all`}
+//             >
+//               {isDarkMode ? 'Light' : 'Dark'} Mode
+//             </button>
+//           </div>
+//           {/* Chat History */}
+//           <div
+//             className={`flex-1 overflow-y-scroll p-4 ${
+//               isDarkMode ? 'text-white' : 'text-black'
+//             }`}
+//           >
+//             {messages.map((message, index) => (
+//               <div key={index} className={`mb-4 ${message.isUser ?  'text-right' : 'text-left'}`}>
+//                 <div
+//                   className={`${
+//                     isDarkMode ? 'bg-gray-900' : 'bg-gray-200'
+//                   } p-3 rounded-lg flex justify-between items-center transition-all cursor-pointer hover-bg-gray-600`}
+//                 >
+//                   <div>
+//                     <p className={`text-base font-semibold ${message.isUser ? 'text-blue-500' : 'text-blue-700'}`}>
+//                       {message.text}
+//                     </p>
+//                     {message.isUser ? null : (
+//                       <p className="text-sm text-gray-500">{new Date().toLocaleString()}</p>
+//                     )}
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//           {/* Message Input Section */}
+//           <div
+//             className={`py-4 ${
+//               isDarkMode ? 'bg-gradient-to-t from-black to-gray-900' : 'bg-white'
+//             } flex justify-between items-center transition-all`}
+//           >
+//             <input
+//               type="text"
+//               placeholder="Type your message.."
+//               value={question}
+//               onChange={(e) => setInputMessage(e.target.value)}
+//               className={`w-3/4 p-3 m-3 rounded-full border ${
+//                 isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
+//               } ${
+//                 isDarkMode ? 'text-white' : 'text-black'
+//               } focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all`}
+//             />
+//             <button
+//               onClick={handleSendMessage}
+//               className={`px-4 py-2 rounded-full font-semibold transition-all ${
+//                 isDarkMode
+//                   ? 'bg-blue-500 hover:bg-blue-600 text-white'
+//                   : 'bg-blue-400 hover:bg-blue-500 text-black'
+//               }`}
+//             >
+//               Send
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ChatInterface;
+
+
+
 import React, { useState } from 'react';
 
 const ChatInterface = () => {
@@ -6,9 +246,10 @@ const ChatInterface = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('Sem 5'); // Default category
-
-  
-  const [response, setResponse] = useState('');
+  const [selectedBranch, setSelectedBranch] = useState(null);
+  const [selectedSemester, setSelectedSemester] = useState(null);
+  const [selectedSubject, setSelectedSubject] = useState(null);
+  const [loader, setLoader] = useState(false);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -19,7 +260,7 @@ const ChatInterface = () => {
       const newMessages = [...messages, { text: question, isUser: true }];
       setMessages(newMessages);
       
-
+      setLoader(true);
       try {
         const requestOptions = {
           method: 'POST',
@@ -27,7 +268,7 @@ const ChatInterface = () => {
           body: JSON.stringify({ question }),
         };
   
-        const url = 'https://11c7-34-134-126-4.ngrok-free.app/api'; // Replace with your API endpoint
+        const url = 'https://2d41-34-16-121-231.ngrok-free.app/api'; // Replace with your API endpoint
   
         const response = await fetch(url, requestOptions);
         if (!response.ok) {
@@ -40,34 +281,36 @@ const ChatInterface = () => {
         const updatedMessages = [...newMessages, { text: data.message, isUser: false }];
         setMessages(updatedMessages);
         setInputMessage('');
+        setLoader(false);
       } catch (error) {
         console.error('Error:', error);
       }
-    
-      
-        
-      
-
-      
-   
       
     }
   };
 
+
   const handleFileUpload = (e) => {
-    const files = e.target.files;
-    const fileArray = Array.from(files);
-    const currentDate = new Date().toLocaleString();
-    const filesWithDate = fileArray.map((file) => ({
-      file,
-      date: currentDate,
-      category: selectedCategory,
-    }));
-    setUploadedFiles([...uploadedFiles, ...filesWithDate]);
+    if (selectedBranch && selectedSemester && selectedSubject) {
+      const files = e.target.files;
+      const fileArray = Array.from(files);
+      const currentDate = new Date().toLocaleString();
+      const filesWithDate = fileArray.map((file) => ({
+        file,
+        date: currentDate,
+        branch: selectedBranch,
+        semester: selectedSemester,
+        subject: selectedSubject,
+      }));
+      setUploadedFiles([...uploadedFiles, ...filesWithDate]);
+    }
   };
 
   const changeCategory = (category) => {
     setSelectedCategory(category);
+    setSelectedBranch(null);
+    setSelectedSemester(null);
+    setSelectedSubject(null);
   };
 
   return (
@@ -91,52 +334,127 @@ const ChatInterface = () => {
           {/* Document Upload Section */}
           <div className="p-4">
             <h2 className="text-lg font-semibold mb-2">Upload Documents</h2>
-            <input
-              type="file"
-              accept=".pdf, .doc, .docx"
-              multiple
-              onChange={handleFileUpload}
-              className="w-full p-2 border rounded-lg"
-            />
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold mb-2">Uploaded Documents</h3>
-              {/* Category selection buttons */}
+            {/* Branch selection buttons */}
+            <div className="mb-2">
+              
+            </div>
+            {selectedCategory === 'Sem 5' && (
               <div className="mb-2">
                 <button
-                  onClick={() => changeCategory('Sem 5')}
+                  onClick={() => setSelectedBranch('Computer Science')}
                   className={`${
-                    selectedCategory === 'Sem 5'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-400 text-black'
-                  } px-3 py-2 rounded-full mr-2 cursor-pointer transition-all hover:bg-blue-400 hover:text-white`}
-                >
-                  Sem 5
-                </button>
-                <button
-                  onClick={() => changeCategory('Sem 6')}
-                  className={`${
-                    selectedCategory === 'Sem 6'
+                    selectedBranch === 'Computer Science'
                       ? 'bg-blue-500 text-white'
                       : 'bg-gray-400 text-black'
                   } px-3 py-2 rounded-full cursor-pointer transition-all hover:bg-blue-400 hover:text-white`}
                 >
-                  Sem 6
+                  Computer Science
                 </button>
               </div>
+            )}
+            {selectedBranch === 'Computer Science' && (
+              <div className="mb-2">
+                <button
+                  onClick={() => setSelectedSemester('Sem 5')}
+                  className={`${
+                    selectedSemester === 'Sem 5'
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-gray-400 text-black'
+                  } px-3 py-2 rounded-full cursor-pointer transition-all hover:bg-blue-400 hover:text-white`}
+                >
+                  5th Sem
+                </button>
+              </div>
+            )}
+            {selectedSemester === 'Sem 5' && (
+              <div className="mb-2 ">
+                {/* Add subject buttons for 5th Sem Computer Science */}
+                <button
+                  onClick={() => setSelectedSubject('Subject 1')}
+                  className={`${
+                    selectedSubject === 'Subject 1'
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-gray-400 text-black'
+                  } px-3 py-2    rounded-full cursor-pointer transition-all hover-bg-blue-400 hover:text-white`}
+                >
+                 CYBRSECURITY
+                </button>
+                <button
+                  onClick={() => setSelectedSubject('Subject 2')}
+                  className={`${
+                    selectedSubject === 'Subject 2'
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-gray-400 text-black'
+                  } px-3 py-2 rounded-full cursor-pointer transition-all hover-bg-blue-400 hover:text-white`}
+                >
+                  CLOUD COMPUTING
+                </button>
+                <button
+                  onClick={() => setSelectedSubject('Subject 3')}
+                  className={`${
+                    selectedSubject === 'Subject 3'
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-gray-400 text-black'
+                  } px-3 py-2 rounded-full cursor-pointer transition-all hover-bg-blue-400 hover:text-white`}
+                >
+                  DATA SCIENCE
+                </button>
+                <button
+                  onClick={() => setSelectedSubject('Subject 4')}
+                  className={`${
+                    selectedSubject === 'Subject 4'
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-gray-400 text-black'
+                  } px-3 py-2 rounded-full cursor-pointer transition-all hover-bg-blue-400 hover:text-white`}
+                >
+                  IOT
+                </button>
+                <button
+                  onClick={() => setSelectedSubject('Subject 5')}
+                  className={`${
+                    selectedSubject === 'Subject 5'
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-gray-400 text-black'
+                  } px-3 py-2 rounded-full cursor-pointer transition-all hover-bg-blue-400 hover:text-white`}
+                >
+                  DAA
+                </button>
+                <button
+                  onClick={() => setSelectedSubject('Subject 6')}
+                  className={`${
+                    selectedSubject === 'Subject 1'
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-gray-400 text-black'
+                  } px-3 py-2 rounded-full cursor-pointer transition-all hover-bg-blue-400 hover:text-white`}
+                >
+                  MERN STACK
+                </button>
+                
+              </div>
+            )}
+            {/* File input */}
+            {selectedBranch && selectedSemester && selectedSubject && (
+              <input
+                type="file"
+                accept=".pdf, .doc, .docx"
+                multiple
+                onChange={handleFileUpload}
+                className="w-full p-2 border rounded-lg"
+              />
+            )}
+            {/* Uploaded Documents */}
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold mb-2">Uploaded Documents</h3>
               <div className="flex flex-col space-y-3">
                 {uploadedFiles
-                  .filter((item) => item.category === selectedCategory)
+                  .filter((item) => item.branch === selectedBranch && item.semester === selectedSemester && item.subject === selectedSubject)
                   .map((item, index) => (
                     <div
                       key={index}
-                      className={`${
-                        isDarkMode ? 'bg-gray-900' : 'bg-gray-200'
-                      } p-3 rounded-lg flex justify-between items-center transition-all cursor-pointer hover:bg-gray-600`}
+                      className={`${isDarkMode ? 'bg-gray-900' : 'bg-gray-200'} p-3 rounded-lg flex justify-between items-center transition-all cursor-pointer hover-bg-gray-600`}
                     >
                       <div>
-                        <p className="text-base font-semibold">
-                          {item.file.name}
-                        </p>
+                        <p className="text-base font-semibold">{item.file.name}</p>
                         <p className="text-sm text-gray-500">{item.date}</p>
                       </div>
                       <a
@@ -182,14 +500,14 @@ const ChatInterface = () => {
             }`}
           >
             {messages.map((message, index) => (
-              <div key={index} className={`mb-4 ${message.isUser ?  'text-right' : 'text-left'}`}>
+              <div key={index} className={`mb-4 ${message.isUser ? 'text-right' : 'text-left'}`}>
                 <div
                   className={`${
                     isDarkMode ? 'bg-gray-900' : 'bg-gray-200'
                   } p-3 rounded-lg flex justify-between items-center transition-all cursor-pointer hover-bg-gray-600`}
                 >
                   <div>
-                    <p className={`text-base font-semibold ${message.isUser ? 'text-blue-500' : 'text-blue-700'}`}>
+                    <p className={`text-base font-semibold ${message.isUser ? 'text-blue-500' : 'text-black'}`}>
                       {message.text}
                     </p>
                     {message.isUser ? null : (
@@ -199,6 +517,7 @@ const ChatInterface = () => {
                 </div>
               </div>
             ))}
+           {loader?(<iframe src="https://giphy.com/embed/kUTME7ABmhYg5J3psM" width="100" height="80" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>):("")} 
           </div>
           {/* Message Input Section */}
           <div
@@ -231,6 +550,8 @@ const ChatInterface = () => {
         </div>
       </div>
     </div>
+
+    
   );
 };
 
