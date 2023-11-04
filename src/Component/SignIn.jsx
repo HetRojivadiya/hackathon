@@ -154,7 +154,7 @@ function Login({ setStudentData }) {
             </div>
 
             {!loader ? (
-              <button onClick={handleCaptureAndAuthenticate} class="d-grid">
+              <button onClick={handleCaptureAndAuthenticate} className="d-grid">
                 Start Authentication
               </button>
             ) : (
@@ -175,11 +175,11 @@ function Login({ setStudentData }) {
 
       <div className="bg-light">
         <div id="__next">
-          <div class="d-flex flex-column container">
-            <div class="align-items-center justify-content-center g-0 min-vh-100 row">
-              <div class="py-8 py-xl-0 col-xxl-4 col-lg-6 col-md-8 col-12">
-                <div class="smooth-shadow-md card">
-                  <div class="p-6 card-body">
+          <div className="d-flex flex-column container">
+            <div className="align-items-center justify-content-center g-0 min-vh-100 row">
+              <div className="py-8 py-xl-0 col-xxl-4 col-lg-6 col-md-8 col-12">
+                <div className="smooth-shadow-md card">
+                  <div className="p-6 card-body">
                     {isGifVisible && (
                       <img
                         src={gifImage}
@@ -188,47 +188,47 @@ function Login({ setStudentData }) {
                         alt="Animated GIF"
                       />
                     )}
-                    <div class="mb-4">
-                      <h2>Administrator Login</h2>
-                      <p class="mb-6">Please enter your user information.</p>
+                    <div className="mb-4">
+                     <h2>Administrator</h2>
+                      <p className="mb-6">Please enter your user information.</p>
                     </div>
-                    <form class="">
-                      <div class="mb-3">
-                        <label class="form-label" for="username">
+                    <form className="">
+                      <div className="mb-3">
+                        <label className="form-label">
                           email
                         </label>
                         <input
                           name="username"
                           placeholder="Enter email here"
                           id="username"
-                          class="form-control"
+                          className="form-control"
                           type="text"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                         />
                       </div>
-                      <div class="mb-3">
-                        <label class="form-label" for="password">
+                      <div className="mb-3">
+                        <label className="form-label" >
                           Password
                         </label>
                         <input
                           name="password"
-                          placeholder="**************"
+                          placeholder="enter password"
                           type="password"
                           id="password"
-                          class="form-control"
+                          className="form-control"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                         />
                       </div>
-                      <div class="d-lg-flex justify-content-between align-items-center mb-4">
-                        <div class="form-check">
+                      <div className="d-lg-flex justify-content-between align-items-center mb-4">
+                        <div className="form-check">
                           <input
                             type="checkbox"
                             id="rememberme"
-                            class="form-check-input"
+                            className="form-check-input"
                           />
-                          <label for="rememberme" class="form-check-label">
+                          <label className="form-check-label">
                             Remember me
                           </label>
                         </div>
@@ -238,7 +238,7 @@ function Login({ setStudentData }) {
                           {!loader ? (
                             <button
                               onClick={handleCaptureAndAuthenticate}
-                              class="btn btn-primary"
+                              className="btn btn-primary"
                             >
                               Start Authentication
                             </button>
@@ -252,15 +252,15 @@ function Login({ setStudentData }) {
                             </div>
                           )}
                         </div>
-                        <div class="d-md-flex justify-content-between mt-4">
-                          <div class="mb-2 mb-md-0">
-                            <a class="fs-5" href="/authentication/sign-up">
+                        <div className="d-md-flex justify-content-between mt-4">
+                          <div className="mb-2 mb-md-0">
+                            <a className="fs-5" href="/authentication/sign-up">
                               Create
                             </a>
                           </div>
                           <div>
                             <a
-                              class="text-inherit fs-5"
+                              className="text-inherit fs-5"
                               href="/authentication/forget-password"
                             >
                               Forgot your password?

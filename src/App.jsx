@@ -1,30 +1,21 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from "react";
+import { HashRouter,Route, Routes } from "react-router-dom";
+import ChatInterface from "./Component/ChatInterface";
+import SignInForm from "./Component/SignInForm";
+import SignIn from "./Component/SignIn";
+import Test from "./Component/PDF_test"
 
-function App() {
-  const [inputText, setInputText] = useState('');
-  const [response, setResponse] = useState('');
-
-  const sendToColab = async () => {
-    try {
-      const result = await axios.post('http://localhost:3001/send-to-colab', { inputText });
-      setResponse(result.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+export default function App() {
   return (
-    <div>
-      <input
-        type="text"
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
-      />
-      <button onClick={sendToColab}>Send to Colab</button>
-      <div>Response from Colab: {response}</div>
-    </div>
+
+       <HashRouter>
+        <Routes>
+          <Route path="/signin" element={<SignIn/>} />
+          <Route path="/" element={<ChatInterface/>} />
+          <Route path="/signin-form" element={<SignInForm/>} />
+          <Route path="test" element={<Test/>} />
+        </Routes>
+         
+    </HashRouter>
   );
 }
-
-export default App;

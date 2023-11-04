@@ -2,27 +2,55 @@ import React, { useState } from 'react';
 
 const ChatInterface = () => {
   const [messages, setMessages] = useState([]);
-  const [inputMessage, setInputMessage] = useState('');
+  const [question, setInputMessage] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('Sem 5'); // Default category
+
+  
+  const [response, setResponse] = useState('');
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  const handleSendMessage = () => {
-    if (inputMessage.trim() !== '') {
-      const newMessages = [...messages, { text: inputMessage, isUser: true }];
+  const handleSendMessage = async() => {
+    if (question.trim() !== '') {
+      const newMessages = [...messages, { text: question, isUser: true }];
       setMessages(newMessages);
-      setInputMessage('');
+      
 
-      // Simulate a chatbot response (you can replace this with actual logic)
-      setTimeout(() => {
-        const chatbotResponse = 'This is a chatbot response.';
-        const updatedMessages = [...newMessages, { text: chatbotResponse, isUser: false }];
+      try {
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question }),
+        };
+  
+        const url = 'https://11c7-34-134-126-4.ngrok-free.app/api'; // Replace with your API endpoint
+  
+        const response = await fetch(url, requestOptions);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+  
+        const data = await response.json();
+        console.log(data.message);
+  
+        const updatedMessages = [...newMessages, { text: data.message, isUser: false }];
         setMessages(updatedMessages);
-      }, 5000);
+        setInputMessage('');
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    
+      
+        
+      
+
+      
+   
+      
     }
   };
 
@@ -181,7 +209,7 @@ const ChatInterface = () => {
             <input
               type="text"
               placeholder="Type your message.."
-              value={inputMessage}
+              value={question}
               onChange={(e) => setInputMessage(e.target.value)}
               className={`w-3/4 p-3 m-3 rounded-full border ${
                 isDarkMode ? 'bg-gray-900' : 'bg-gray-100'

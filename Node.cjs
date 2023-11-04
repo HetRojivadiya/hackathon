@@ -13,7 +13,7 @@ app.post('/send-to-colab', async (req, res) => {
 
   try {
     console.log("ohk");
-    const colabResponse = await axios.post('https://172.28.0.12:8081/receive-from-react', { inputText });
+    const colabResponse = await axios.get('https://e9d0-34-147-83-121.ngrok-free.app/');
 
     const response = colabResponse.data;
     res.json(response);

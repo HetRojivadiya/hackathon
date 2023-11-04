@@ -11,7 +11,7 @@ CORS(app)
 
 
 
-reference_image_path = "./het2.jpg"
+reference_image_path = "./het2.jpeg"
 reference_image = cv2.imread(reference_image_path, cv2.IMREAD_GRAYSCALE)
 
 def authenticate_face(input_image):
@@ -27,8 +27,8 @@ def authenticate_face(input_image):
     reference_face = cv2.resize(reference_image, (input_image.shape[1], input_image.shape[0]))
     similarity_score = np.mean(np.abs(input_image - reference_face))
 
-    similarity_threshold = 140
-
+    similarity_threshold = 135
+    
     print(similarity_score)
     
     if similarity_score > similarity_threshold:
